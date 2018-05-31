@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FightingClub
 {
@@ -33,6 +34,11 @@ namespace FightingClub
 
         public void NextRound()
         {
+            playerModel1.GetHit(EnumPlayerBodyPart.Body);
+            playerModel1.SetBlock(EnumPlayerBodyPart.Body);
+
+
+           
             round++;
             RoundHandler(this, new GameModelEventArgs(round));
         }
@@ -45,6 +51,15 @@ namespace FightingClub
         public GameModelEventArgs(int round)
         {
             this.round = round;
+        }
+    }
+    public class GameLogEventArgs : EventArgs
+    {
+        public readonly StringBuilder log;
+
+        public GameLogEventArgs(StringBuilder log)
+        {
+            this.log = log;
         }
     }
 }

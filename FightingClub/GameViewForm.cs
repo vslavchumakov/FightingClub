@@ -16,14 +16,22 @@ namespace FightingClub
 
         public GameView()
         {
-            InitializeComponent();
-           
+            InitializeComponent();      
         }
 
         internal void UpdatePlayersInfo(GameModel gameModel)
         {
             textPlayerName_1.Text = gameModel.players[0].Name;
+            progressBarPlayerHealth_1.Maximum = gameModel.players[0].Health;
+            progressBarPlayerHealth_1.Value = gameModel.players[0].Health;
+            progressBarPlayerHealth_1.Minimum = 0;
+            progressBarPlayerHealth_1.Step = 1;
+
             textPlayerName_2.Text = gameModel.players[1].Name;
+            progressBarPlayerHealth_2.Maximum = gameModel.players[1].Health;
+            progressBarPlayerHealth_2.Value = gameModel.players[1].Health;
+            progressBarPlayerHealth_2.Minimum = 0;
+            progressBarPlayerHealth_2.Step = 1;
         }
 
         internal void UpdateRound(GameModelEventArgs eventArgs)
@@ -52,6 +60,12 @@ namespace FightingClub
                 if (item.Checked) checkedRadioButton = item;
             }
             return checkedRadioButton;
+        }
+
+        private void UpdateTextLog(GameModelEventArgs eventArgs)
+        {
+            StringBuilder sb = new StringBuilder("Название: ");
+            textLog.Text = sb.ToString(); 
         }
     }
 }

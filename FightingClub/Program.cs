@@ -16,7 +16,10 @@ namespace FightingClub
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            GameView view = new GameView();
+            GameModel model = new GameModel();
+            GameController controller = new GameController(view, model);
+            Application.Run(view);
         }
     }
 }

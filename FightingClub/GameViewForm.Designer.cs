@@ -144,26 +144,26 @@
             this.radioButtonBlockHead.Text = "блок  головы";
             this.radioButtonBlockHead.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // groupBoxHit
             // 
             this.groupBoxHit.Controls.Add(this.radioButtonHitLegs);
             this.groupBoxHit.Controls.Add(this.radioButtonHitHead);
             this.groupBoxHit.Controls.Add(this.radioButtonHitChest);
             this.groupBoxHit.Location = new System.Drawing.Point(139, 186);
-            this.groupBoxHit.Name = "groupBox1";
+            this.groupBoxHit.Name = "groupBoxHit";
             this.groupBoxHit.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.groupBoxHit.Size = new System.Drawing.Size(200, 100);
             this.groupBoxHit.TabIndex = 10;
             this.groupBoxHit.TabStop = false;
             this.groupBoxHit.Text = "Атака";
             // 
-            // groupBox2
+            // groupBoxBlock
             // 
             this.groupBoxBlock.Controls.Add(this.radioButtonBlockLegs);
             this.groupBoxBlock.Controls.Add(this.radioButtonBlockHead);
             this.groupBoxBlock.Controls.Add(this.radioButtonBlockChest);
             this.groupBoxBlock.Location = new System.Drawing.Point(446, 186);
-            this.groupBoxBlock.Name = "groupBox2";
+            this.groupBoxBlock.Name = "groupBoxBlock";
             this.groupBoxBlock.Size = new System.Drawing.Size(200, 100);
             this.groupBoxBlock.TabIndex = 11;
             this.groupBoxBlock.TabStop = false;

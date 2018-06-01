@@ -32,6 +32,11 @@ namespace FightingClub
             progressBarPlayerHealth_2.Value = gameModel.players[1].Health;
             progressBarPlayerHealth_2.Minimum = 0;
             progressBarPlayerHealth_2.Step = 1;
+
+            buttonStartRound.Enabled = false;
+
+            CheckedRadioButtonEvent(groupBoxHit.Controls);
+            CheckedRadioButtonEvent(groupBoxBlock.Controls);
         }
 
         internal void UpdateRound(GameModelEventArgs eventArgs)
@@ -44,20 +49,31 @@ namespace FightingClub
             this.controller = controller;
         }
 
-        private void buttonStartRound_Click(object sender, EventArgs e)
+        private void CheckedRadioButtonEvent(Control.ControlCollection collection)
+        {
+            foreach (RadioButton item in collection)
+            {
+                item.MouseClick += CheckedRadioButton_MouseClick;
+            }
+        }
+
+        private void CheckedRadioButton_MouseClick(object sender, MouseEventArgs e)
         {
             RadioButton checkedHitRadioButton = GetCheckedRadioButton(groupBoxHit.Controls);
             RadioButton checkedBlockRadioButton = GetCheckedRadioButton(groupBoxBlock.Controls);
-            controller.StartRound();
+            if (checkedHitRadioButton != null && checkedBlockRadioButton != null)
+            {
+                buttonStartRound.Enabled = true;
+            }
         }
 
         private RadioButton GetCheckedRadioButton(Control.ControlCollection collection)
         {
             RadioButton checkedRadioButton = null;
-
             foreach (RadioButton item in collection)
             {
-                if (item.Checked) checkedRadioButton = item;
+                if (item.Checked)
+                    checkedRadioButton = item;
             }
             return checkedRadioButton;
         }
@@ -66,6 +82,11 @@ namespace FightingClub
         {
             StringBuilder sb = new StringBuilder("Название: ");
             textLog.Text = sb.ToString(); 
+        }
+
+        private void buttonStartRound_Click(object sender, EventArgs e)
+        {
+            controller.StartRound();
         }
     }
 }

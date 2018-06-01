@@ -9,17 +9,19 @@ namespace FightingClub
         private int round;
         public int Round { get => round; set => round = value; }
 
-        public delegate void GameModelHandler(object sender, GameModelEventArgs eventArgs);
-        public event GameModelHandler RoundHandler = delegate { };
+        public delegate void GameModelHandler(GameModel sender, GameModelEventArgs eventArgs);
+        public event GameModelHandler StartRound = delegate { };
+        public event GameModelHandler FinishRound = delegate { };
 
         public List<PlayerModel> players = new List<PlayerModel>();
+
         PlayerModel playerModel1;
         PlayerModel playerModel2;
 
         public GameModel()
         {
             round = 1;
-           
+
             playerModel1 = new PlayerModel();
             playerModel1.Name = "Ivan";
             playerModel1.Health = 100;
@@ -29,28 +31,16 @@ namespace FightingClub
             playerModel2.Name = "Ramzan";
             playerModel2.Health = 100;
             players.Add(playerModel2);
-
-        }
-
-        public void NextRound()
-        {
-            playerModel1.GetHit(EnumPlayerBodyPart.Body);
-            playerModel1.SetBlock(EnumPlayerBodyPart.Body);
-
-
-           
-            round++;
-            RoundHandler(this, new GameModelEventArgs(round));
         }
     }
 
     public class GameModelEventArgs : EventArgs
     {
-        public readonly int round;
+        public bool start;
 
-        public GameModelEventArgs(int round)
+        public GameModelEventArgs(bool start)
         {
-            this.round = round;
+            this.start = start;
         }
     }
     public class GameLogEventArgs : EventArgs

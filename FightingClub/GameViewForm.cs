@@ -19,29 +19,42 @@ namespace FightingClub
             InitializeComponent();      
         }
 
-        internal void UpdatePlayersInfo(GameModel gameModel)
+        internal void UpdatePlayersInfo(PlayerModel sender, PlayerModelEventArgs eventArgs)
         {
-            textPlayerName_1.Text = gameModel.players[0].Name;
-            progressBarPlayerHealth_1.Maximum = gameModel.players[0].Health;
-            progressBarPlayerHealth_1.Value = gameModel.players[0].Health;
-            progressBarPlayerHealth_1.Minimum = 0;
-            progressBarPlayerHealth_1.Step = 1;
+            //kostil
+            if (sender.Name == "Ivan")
+            {
+                textPlayerName_1.Text = eventArgs.name;
+                textPlayerHealth_1.Text = eventArgs.health.ToString();
+                progressBarPlayerHealth_1.Maximum = 100;
+                progressBarPlayerHealth_1.Value = eventArgs.health;
+                progressBarPlayerHealth_1.Minimum = 0;
+                progressBarPlayerHealth_1.Step = 1;
+            }
+            else
+            {
+                textPlayerName_2.Text = eventArgs.name;
+                textPlayerHealth_2.Text = eventArgs.health.ToString();
+                progressBarPlayerHealth_2.Maximum = 100;
+                progressBarPlayerHealth_2.Value = eventArgs.health;
+                progressBarPlayerHealth_2.Minimum = 0;
+                progressBarPlayerHealth_2.Step = 1;
+            }
 
-            textPlayerName_2.Text = gameModel.players[1].Name;
-            progressBarPlayerHealth_2.Maximum = gameModel.players[1].Health;
-            progressBarPlayerHealth_2.Value = gameModel.players[1].Health;
-            progressBarPlayerHealth_2.Minimum = 0;
-            progressBarPlayerHealth_2.Step = 1;
-
-            buttonStartRound.Enabled = false;
+            //buttonStartRound.Enabled = false;
 
             CheckedRadioButtonEvent(groupBoxHit.Controls);
             CheckedRadioButtonEvent(groupBoxBlock.Controls);
         }
 
+        internal void EnabledButtonStart(bool start)
+        {
+            buttonStartRound.Enabled = start;
+        }
+
         internal void UpdateRound(GameModelEventArgs eventArgs)
         {
-            textRoundNumber.Text = eventArgs.round.ToString();
+            textRoundNumber.Text = eventArgs.start.ToString();
         }
 
         internal void Init(GameController controller)
@@ -63,7 +76,7 @@ namespace FightingClub
             RadioButton checkedBlockRadioButton = GetCheckedRadioButton(groupBoxBlock.Controls);
             if (checkedHitRadioButton != null && checkedBlockRadioButton != null)
             {
-                buttonStartRound.Enabled = true;
+                //controller.StartRound();
             }
         }
 
@@ -86,7 +99,7 @@ namespace FightingClub
 
         private void buttonStartRound_Click(object sender, EventArgs e)
         {
-            controller.StartRound();
+            //controller.StartRound();
         }
     }
 }

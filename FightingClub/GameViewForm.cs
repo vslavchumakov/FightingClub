@@ -13,6 +13,8 @@ namespace FightingClub
     public partial class GameView : Form
     {
         private GameController controller;
+        RadioButton checkedHitRadioButton;
+        RadioButton checkedBlockRadioButton;
 
         public GameView()
         {
@@ -41,10 +43,13 @@ namespace FightingClub
                 progressBarPlayerHealth_2.Step = 1;
             }
 
-            //buttonStartRound.Enabled = false;
-
             CheckedRadioButtonEvent(groupBoxHit.Controls);
             CheckedRadioButtonEvent(groupBoxBlock.Controls);
+        }
+
+        internal void PlayerDeath(PlayerModel sender, PlayerModelEventArgs eventArgs)
+        {
+            textLog.Text = "Игрок " + eventArgs.name + " получил смертельные увечия!";
         }
 
         internal void EnabledButtonStart(bool start)
@@ -72,11 +77,11 @@ namespace FightingClub
 
         private void CheckedRadioButton_MouseClick(object sender, MouseEventArgs e)
         {
-            RadioButton checkedHitRadioButton = GetCheckedRadioButton(groupBoxHit.Controls);
-            RadioButton checkedBlockRadioButton = GetCheckedRadioButton(groupBoxBlock.Controls);
+            checkedHitRadioButton = GetCheckedRadioButton(groupBoxHit.Controls);
+            checkedBlockRadioButton = GetCheckedRadioButton(groupBoxBlock.Controls);
             if (checkedHitRadioButton != null && checkedBlockRadioButton != null)
             {
-                //controller.StartRound();
+                controller.RoundIsStart();
             }
         }
 
@@ -99,7 +104,7 @@ namespace FightingClub
 
         private void buttonStartRound_Click(object sender, EventArgs e)
         {
-            //controller.StartRound();
+            controller.StartRound();
         }
     }
 }

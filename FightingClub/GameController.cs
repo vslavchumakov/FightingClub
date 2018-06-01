@@ -14,6 +14,8 @@ namespace FightingClub
             this.model.StartRound += Model_StartRound;
             this.view.Init(this);
 
+            this.model.RoundIsStart = false;
+
             foreach (PlayerModel player in this.model.players)
             {
                 PlayerModelEventArgs eventArgs = new PlayerModelEventArgs(player.Name, player.Health);
@@ -24,6 +26,11 @@ namespace FightingClub
             }
         }
 
+        public void RoundIsStart()
+        {
+            model.RoundIsStart = true;
+        }
+
         private void Model_StartRound(GameModel sender, GameModelEventArgs eventArgs)
         {
             view.EnabledButtonStart(eventArgs.start);
@@ -31,7 +38,8 @@ namespace FightingClub
 
         private void Player_Death(PlayerModel sender, PlayerModelEventArgs eventArgs)
         {
-            view.UpdatePlayersInfo(sender, eventArgs);
+            view.PlayerDeath(sender, eventArgs);
+                //view.UpdatePlayersInfo(sender, eventArgs);
         }
 
         private void Player_Block(PlayerModel sender, PlayerModelEventArgs eventArgs)

@@ -6,9 +6,7 @@ namespace FightingClub
 {
     internal class GameModel
     {
-        private int round;
-        public int Round { get => round; set => round = value; }
-
+        private bool roundIsStart;
         public delegate void GameModelHandler(GameModel sender, GameModelEventArgs eventArgs);
         public event GameModelHandler StartRound = delegate { };
         public event GameModelHandler FinishRound = delegate { };
@@ -18,10 +16,22 @@ namespace FightingClub
         PlayerModel playerModel1;
         PlayerModel playerModel2;
 
+        public bool RoundIsStart
+        {
+            get
+            {
+                return roundIsStart;
+            }
+
+            set
+            {
+                roundIsStart = value;
+                StartRound(this, new GameModelEventArgs(value));
+            }
+        }
+
         public GameModel()
         {
-            round = 1;
-
             playerModel1 = new PlayerModel();
             playerModel1.Name = "Ivan";
             playerModel1.Health = 100;
